@@ -11,6 +11,7 @@ import { CommunityPopup } from "@/components/community-popup" // Import the comm
 import { ScrollToTop } from "@/components/scroll-to-top" // Import the scroll to top component
 import { WelcomePopup } from "@/components/welcome-popup" // Import the welcome popup component
 import { Chatbot } from "@/components/chatbot" // Import the Chatbot component
+import { AuthProvider } from './contexts/AuthContext'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -35,18 +36,20 @@ export default function RootLayout({
         className={`${inter.className} min-h-screen bg-white dark:bg-[#122C39] text-[#122C39] dark:text-white`}
         suppressHydrationWarning
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true} disableTransitionOnChange>
-          <div className="flex min-h-screen flex-col">
-            <ScrollToTop /> {/* Add the ScrollToTop component */}
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <CustomCursor /> {/* Add the custom cursor component */}
-            <CommunityPopup /> {/* Add the community popup component */}
-            <WelcomePopup /> {/* Add the welcome popup component */}
-            <Chatbot /> {/* Add the Chatbot component */}
-          </div>
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true} disableTransitionOnChange>
+            <div className="flex min-h-screen flex-col">
+              <ScrollToTop /> {/* Add the ScrollToTop component */}
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <CustomCursor /> {/* Add the custom cursor component */}
+              <CommunityPopup /> {/* Add the community popup component */}
+              <WelcomePopup /> {/* Add the welcome popup component */}
+              <Chatbot /> {/* Add the Chatbot component */}
+            </div>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )
